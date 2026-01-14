@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><title>Patient Registration</title>
+     <title>Registration Success</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <p><a href="/">Register Another</a> | <a href="/users">View Users</a></p>
+</body>
+
+<body>
+    <h2>Patients Registration</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category=='error' %}red{% else %}green{% endif %}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/register">
+        <p>First Name: <input type="text" name="firstname" required></p>
+        <p>Last Name: <input type="text" name="lastname" required></p>
+        <p>Email: <input type="email" name="email" required></p>
+        <p>room: <input type="text" name="room" required></p>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p><a href="/users">View All Users</a></p>
+</body>
+<body>
+    <h2>All Registered Users</h2>
+    <table border="1">
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Date</th></tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/">Back to Registration</a></p>
+
+    <h2>All Registered Users</h2>
+    <table border="1">
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Date</th></tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/">Back to Registration</a></p>
+</body>
+
+</html>
